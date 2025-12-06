@@ -52,7 +52,13 @@ std::vector<SubtitlesBlock> load_subtitles_file_data
 
     while (std::getline(file_content, line))
     {
-        if (line.empty())
+        if (!line.empty() && line.back() == '\r')
+        {
+            // Remove any "\r" as it looks like an empty line visually, but actually isn't for the machine.
+            line.pop_back();
+        }
+
+        if (trim(line).empty())
         {
             // Try to treat all of the collected data so far as a block, if we finally reached an empty line.
             process_block(block, output);

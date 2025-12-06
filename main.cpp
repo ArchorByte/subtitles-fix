@@ -18,7 +18,7 @@ int main()
 {
     std::string file_path;
     std::cout << "Path to the subtitle file: ";
-    std::cin >> file_path;
+    std::getline(std::cin, file_path);
 
     if (!std::filesystem::exists(file_path))
     {
